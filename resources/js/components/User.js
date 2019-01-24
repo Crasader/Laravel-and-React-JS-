@@ -27,6 +27,7 @@ export default class User extends React.Component {
         return (
             <div>
                 <h2>Users Listing</h2>
+                <a href="/users/create" className="btn btn-primary">Add New User</a>
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -56,4 +57,6 @@ export default class User extends React.Component {
     }
 }
 
-ReactDOM.render(<User />, document.getElementById('app'));
+if (document.getElementById('app')) {
+    ReactDOM.render(<User />, document.getElementById('app'));
+}

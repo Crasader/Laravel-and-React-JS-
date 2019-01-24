@@ -3,16 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel</title>
-        <link href="css/app.css" rel="stylesheet" type="text/css">
+        <title>Laravel 5.6 and React JS</title>
+        <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     </head>
     <body>
-        {{-- <div id="example"></div> --}}
         <div class="container">
             <div class="row">
-                <div id="app" class="col-lg-12"></div>
+                @yield('content')
             </div>
         </div>
-        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
     </body>
 </html>

@@ -59866,9 +59866,9 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
-
 __webpack_require__(/*! ./components/User */ "./resources/js/components/User.js");
+
+__webpack_require__(/*! ./components/Create */ "./resources/js/components/Create.js");
 
 /***/ }),
 
@@ -59930,20 +59930,22 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Example.js":
-/*!********************************************!*\
-  !*** ./resources/js/components/Example.js ***!
-  \********************************************/
+/***/ "./resources/js/components/Create.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Create.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Example; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Create; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -59965,43 +59967,127 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Example =
+
+var Create =
 /*#__PURE__*/
-function (_Component) {
-  _inherits(Example, _Component);
+function (_React$Component) {
+  _inherits(Create, _React$Component);
 
-  function Example() {
-    _classCallCheck(this, Example);
+  function Create() {
+    var _this;
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Example).apply(this, arguments));
+    _classCallCheck(this, Create);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Create).call(this));
+    _this.state = {
+      name: '',
+      email: '',
+      password: ''
+    };
+    return _this;
   }
 
-  _createClass(Example, [{
+  _createClass(Create, [{
+    key: "handleNameChange",
+    value: function handleNameChange(e) {
+      this.setState({
+        name: e.target.value
+      });
+    }
+  }, {
+    key: "handleEmailChange",
+    value: function handleEmailChange(e) {
+      this.setState({
+        email: e.target.value
+      });
+    }
+  }, {
+    key: "handlePasswordChange",
+    value: function handlePasswordChange(e) {
+      this.setState({
+        password: e.target.value
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      console.log(this.state);
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/api/users/', this.state).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Add New User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "form-horizontal",
+        onSubmit: this.handleSubmit.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "control-label col-sm-2",
+        htmlFor: "name"
+      }, "Name:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "name",
+        placeholder: "Enter Name",
+        name: "name",
+        value: this.state.name,
+        onChange: this.handleNameChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "control-label col-sm-2",
+        htmlFor: "email"
+      }, "Email:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        id: "email",
+        placeholder: "Enter Email",
+        name: "email",
+        value: this.state.email,
+        onChange: this.handleEmailChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "control-label col-sm-2",
+        htmlFor: "pwd"
+      }, "Password:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "password",
+        className: "form-control",
+        id: "pwd",
+        placeholder: "Enter password",
+        name: "password",
+        value: this.state.password,
+        onChange: this.handlePasswordChange.bind(this)
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-header"
-      }, "Example Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, "I'm an example component!")))));
+        className: "col-sm-offset-2 col-sm-10"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-default"
+      }, "Save")))));
     }
   }]);
 
-  return Example;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+  return Create;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
 
-if (document.getElementById('example')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Example, null), document.getElementById('example'));
+if (document.getElementById('create')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Create, null), document.getElementById('create'));
 }
 
 /***/ }),
@@ -60076,7 +60162,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Users Listing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Users Listing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/users/create",
+        className: "btn btn-primary"
+      }, "Add New User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-bordered"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.data.map(function (user, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -60094,7 +60183,10 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(User, null), document.getElementById('app'));
+
+if (document.getElementById('app')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(User, null), document.getElementById('app'));
+}
 
 /***/ }),
 
