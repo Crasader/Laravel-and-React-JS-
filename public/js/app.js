@@ -60160,20 +60160,41 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "deleteUser",
+    value: function deleteUser(user) {
+      console.log(user);
+      var $this = this;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.delete('/api/users/' + user.id).then(function (response) {
+        console.log(response);
+        var newState = $this.state.data.slice();
+        newState.splice(newState.indexOf(user), 1);
+        $this.setState({
+          data: newState
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Users Listing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "/users/create",
         className: "btn btn-primary"
       }, "Add New User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "table table-bordered"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "ID"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.state.data.map(function (user, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: i
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "",
           className: "btn btn-primary"
         }, "Edit"), " ||", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: "",
-          className: "btn btn-danger"
+          href: "javascript:;",
+          className: "btn btn-danger",
+          onClick: _this2.deleteUser.bind(_this2, user)
         }, "Delete")));
       }))));
     }
