@@ -60326,7 +60326,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(User).call(this));
     _this.state = {
-      data: []
+      data: [],
+      url: '/api/users',
+      pagination: []
     };
     return _this;
   }
@@ -60334,14 +60336,42 @@ function (_React$Component) {
   _createClass(User, [{
     key: "componentWillMount",
     value: function componentWillMount() {
+      this.fetchUsers();
+    }
+  }, {
+    key: "fetchUsers",
+    value: function fetchUsers() {
       var $this = this;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/api/users').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(this.state.url).then(function (response) {
         $this.setState({
-          data: response.data
+          data: $this.state.data.length > 0 ? $this.state.data.concat(response.data.data) : response.data.data,
+          url: response.data.next_page_url
         });
+        $this.makePagnation(response.data);
       }).catch(function (error) {
         console.log(error);
       });
+    }
+  }, {
+    key: "makePagnation",
+    value: function makePagnation(data) {
+      var pagination = {
+        current_page: data.current_page,
+        last_page: data.last_page,
+        next_page_url: data.next_page_url,
+        rev_page_url: data.prev_page_url
+      };
+      this.setState({
+        pagination: pagination
+      });
+    }
+  }, {
+    key: "loadMore",
+    value: function loadMore(data) {
+      this.setState({
+        url: this.state.pagination.next_page_url
+      });
+      this.fetchUsers();
     }
   }, {
     key: "render",
@@ -60359,7 +60389,10 @@ function (_React$Component) {
           user: user,
           object: _this2
         });
-      }))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-default",
+        onClick: this.loadMore.bind(this)
+      }, "Load More Results"));
     }
   }]);
 

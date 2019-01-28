@@ -7,22 +7,51 @@ export default class User extends React.Component {
     constructor(){
         super();
         this.state = {
-            data: []
+            data: [],
+            url: '/api/users',
+            pagination: []
         }
     }
 
     componentWillMount() {
-        let $this = this;
-
-        axios.get('/api/users').then(response => {
-            $this.setState({
-                data: response.data
-            })            
-        }).catch(error => {
-            console.log(error);
-        })
+        this.fetchUsers();
     }
 
+    fetchUsers() {
+        let $this = this;
+
+        axios.get(this.state.url).then(response => {
+            $this.setState({
+                data: $this.state.data.length > 0 ? $this.state.data.concat(response.data.data) : response.data.data,
+                url: response.data.next_page_url
+            });
+
+            $this.makePagnation(response.data);
+        }).catch(error => {
+            console.log(error);
+        });
+    }
+
+    makePagnation(data){
+        let pagination = {
+            current_page: data.current_page,
+            last_page: data.last_page,
+            next_page_url:data.next_page_url,
+            rev_page_url: data.prev_page_url
+        };
+
+        this.setState({
+            pagination: pagination
+        });
+    }
+
+    loadMore(data) {
+        this.setState({
+            url: this.state.pagination.next_page_url
+        });
+
+        this.fetchUsers();
+    }
     
 
     render() {
@@ -46,9 +75,9 @@ export default class User extends React.Component {
 
                             )
                         )}
-                        
-                    </tbody>
+                    </tbody>                    
                 </table>
+                <button className="btn btn-default" onClick={this.loadMore.bind(this)}>Load More Results</button>
             </div>
         )
     }
